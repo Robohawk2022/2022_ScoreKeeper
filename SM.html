@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>FRC 2022 Score Keeper</title>
+</head>
+
+<body>
+    <div class="mid">
+        <div class="mtext m_40u">
+            <h2>Setting</h2>
+            <button class="m_10" id="snm">Add New Match</button>
+        </div>
+        <div class="mtext m_40u d_none" id="Add">
+            <div class="m_10">
+                <p class="d_inline"># Match : </p><input type="text" id="Matchnum">
+            </div>
+            <div class="m_10">
+                <p class="d_inline">Blue 1 : </p><input type="text" id="B1">
+            </div>
+            <div class="m_10">
+                <p class="d_inline">Blue 2 : </p><input type="text" id="B2">
+            </div>
+            <div class="m_10">
+                <p class="d_inline">Red 1 : </p><input type="text" id="R1">
+            </div>
+            <div class="m_10">
+                <p class="d_inline">Red 1 : </p><input type="text" id="R2">
+            </div>
+            <button class="m_10" id="add_confirm">Add Match / Modify Change</button>
+        </div>
+        <div class="mtext m_40u">
+            <table class="border3 mid" id="MatchTable">
+                <tr>
+                    <th class="w10 border1"># Match</th>
+                    <th class="w20 border1">Blue 1</th>
+                    <th class="w20 border1">Blue 2</th>
+                    <th class="w20 border1">Red 1</th>
+                    <th class="w20 border1">Red 2</th>
+                    <th class="w5 border1">Edit</th>
+                    <th class="w5 border1">Delete</th>
+                </tr>
+            </table>
+        </div>
+        <div class="mtext m_40u">
+            <button class="m_10" id="rr">Return</button>
+        </div>
+    </div>
+</body>
+
+<script src="SMscript.js"></script>
+
+</html>

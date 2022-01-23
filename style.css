@@ -1,6 +1,6 @@
 .mid{
     margin:0 auto;
-    width: 600px;
+    width: 700px;
 }
 
 .mtext{
@@ -29,4 +29,21 @@
 
 .d_none{
     display: none;
+}
+
+.w40{
+    width: 40%;
+}
+.w20{
+    width: 20%;
+}
+.w10{
+    width: 10%;
+}
+.w5{
+    width: 5%;
+}
+
+.border1{
+    border: 1px black solid;
 }
