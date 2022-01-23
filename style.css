@@ -1,0 +1,32 @@
+.mid{
+    margin:0 auto;
+    width: 600px;
+}
+
+.mtext{
+    text-align: center;
+}
+
+.m_40u{
+    margin: 40px auto;
+}
+
+.m_10{
+    margin: 10px;
+}
+
+.border3{
+    border: 3px black solid;
+}
+
+.textc{
+    text-align: center;
+}
+
+.d_inline{
+    display: inline;
+}
+
+.d_none{
+    display: none;
+}

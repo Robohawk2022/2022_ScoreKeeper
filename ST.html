@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>FRC 2022 Score Keeper</title>
+</head>
+
+<body>
+    <div class="mid">
+        <div class="mtext m_40u">
+            <h2>Setting</h2>
+            <button class="m_10" id="snt">Add New Team</button>
+            <button class="m_10" id="se">Edit</button>
+        </div>
+        <div class="mtext m_40u d_none" id="Add">
+            <div class="m_10">
+                <p class="d_inline">Number : </p><input type="text" id="setNum">
+            </div>
+            <div class="m_10">
+                <p class="d_inline">Name : </p><input type="text" id="setName">
+            </div>
+            <button class="m_10" id="add_confirm">Add Team</button>
+        </div>
+        <div class="mtext m_40u" id="display_team">
+            <table class="border3 mid">
+                <tr>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </table>
+        </div>
+        <div class="mtext m_40u">
+            <button class="m_10" id="rr">Return</button>
+        </div>
+    </div>
+</body>
+
+<script src="STscript.js"></script>
+
+</html>
