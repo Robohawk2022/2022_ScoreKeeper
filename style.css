@@ -47,3 +47,8 @@
 .border1{
     border: 1px black solid;
 }
+
+.bg_g{
+    background-color: green;
+    color: white;
+}

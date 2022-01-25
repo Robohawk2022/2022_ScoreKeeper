@@ -45,7 +45,8 @@ snt.onclick = function Show_Region() {
     }
 }
 
-add_confirm.onclick = function Edit() {
+add_confirm.onclick = function add_or_edit() {
+    console.log(TeamList)
     if (inum.value == "") {
         alert("Number is Empty.")
         return;
@@ -59,11 +60,12 @@ add_confirm.onclick = function Edit() {
     }
     else {
         TeamList[curIdx] = newTeam(inum.value, iname.value)
+        console.log(newTeam(inum.value, iname.value))
         newTeam_mode = true;
     }
     UpdateTeams()
     add_team.classList.add("d_none")
-
+    d_none = true
 }
 
 function newTeam(number, name) {
@@ -73,7 +75,7 @@ function newTeam(number, name) {
 
 function Delete_Button(event) {
     if (newTeam_mode == false) {
-        alert("You are editing team.")
+        alert("You are editing a team.")
         return
     }
     let num = event.currentTarget.num;
@@ -84,9 +86,14 @@ function Delete_Button(event) {
 }
 
 function Edit_Button(event) {
-    add_team.classList.remove("d_none")
-    newTeam_mode = false
     curIdx = event.currentTarget.num;
+    if (d_none) {
+        add_team.classList.remove("d_none")
+        d_none = false
+    }
+    inum.value = TeamList[event.currentTarget.num].number
+    iname.value = TeamList[event.currentTarget.num].name
+    newTeam_mode = false
 }
 
 function UpdateTeams() {
