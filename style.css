@@ -1,6 +1,6 @@
 .mid{
     margin:0 auto;
-    width: 700px;
+    width: 1000px;
 }
 
 .mtext{
@@ -107,4 +107,8 @@
 
 .d_inline{
     display: inline-block;
+}
+
+.btn{
+    width: 80px;
 }

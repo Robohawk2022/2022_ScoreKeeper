@@ -1,4 +1,25 @@
-// let ms = document.getElementById("match_select")
+let ms = document.getElementById("match_select")
+let Current_Index = -1
+let MatchList = []
+try {
+    MatchList = JSON.parse(localStorage.getItem("Matches_2022"));
+    if (MatchList == null) MatchList = []
+}
+catch {
+    MatchList = [];
+}
+
+for (let i = 0; i < MatchList.length; ++i) {
+    let btn = document.createElement("button")
+    btn.classList.add("btn")
+    btn.classList.add("m_10")
+    btn.textContent = MatchList[i].matchnum
+    if (MatchList[i].result != null) btn.classList.add("bg_g")
+    btn.num = i;
+    btn.addEventListener("click", Set_Match, false);
+    ms.appendChild(btn);
+}
+
 let rr = document.getElementById("rr")
 rr.onclick = function link_to() {
     location.href = "./MainDashBoard.html";
@@ -84,4 +105,110 @@ function Modified_Blue() {
     blue_score.textContent = String(total)
 }
 
+let ra_L1 = document.getElementById("ra_L1") // 2
+let ra_L2 = document.getElementById("ra_L2") // 2
+let ra_L3 = document.getElementById("ra_L3") // 2
 
+let ra_LH = document.getElementById("ra_LH") // 2
+let ra_HH = document.getElementById("ra_HH") // 4
+
+let rt_LH = document.getElementById("rt_LH") // 1
+let rt_HH = document.getElementById("rt_HH") // 2
+
+let rt_nh1 = document.getElementById("rt_nh1") // 0
+let rt_nh2 = document.getElementById("rt_nh2") // 0
+let rt_nh3 = document.getElementById("rt_nh3") // 0
+
+let rt_lh1 = document.getElementById("rt_lh1") // 4
+let rt_lh2 = document.getElementById("rt_lh2") // 4
+let rt_lh3 = document.getElementById("rt_lh3") // 4
+
+let rt_mh1 = document.getElementById("rt_mh1") // 6
+let rt_mh2 = document.getElementById("rt_mh2") // 6
+let rt_mh3 = document.getElementById("rt_mh3") // 6
+
+let rt_hh1 = document.getElementById("rt_hh1") // 10
+let rt_hh2 = document.getElementById("rt_hh2") // 10
+let rt_hh3 = document.getElementById("rt_hh3") // 10
+
+let rt_th1 = document.getElementById("rt_th1") // 16
+let rt_th2 = document.getElementById("rt_th2") // 16
+let rt_th3 = document.getElementById("rt_th3") // 16
+
+let B1 = document.getElementById("B1")
+let B2 = document.getElementById("B2")
+let B3 = document.getElementById("B3")
+let R1 = document.getElementById("R1")
+let R2 = document.getElementById("R2")
+let R3 = document.getElementById("R3")
+
+function Set_Match(event) {
+    let idx = event.currentTarget.num;
+    if (MatchList[idx].result != null) {
+        if (!confirm("Match #" + String(MatchList[idx].matchnum) + " have summitted.\nAre you sure to edit again?"))
+            return;
+    }
+    if (Current_Index != -1) {
+        if (!confirm("Match #" + String(MatchList[Current_Index].matchnum) + " is not summitted yet.\nAre you sure to exit now?"))
+            return;
+    }
+    Current_Index = idx
+    if (MatchList[idx].result == null) {
+        set_Default()
+    }
+    else {
+        /* Set all element */
+    }
+}
+
+function set_Default() {
+    if (Current_Index == -1) {
+        B1.textContent = B2.textContent = B3.textContent = "-"
+        R1.textContent = R2.textContent = R3.textContent = "-"
+    }
+    else {
+        B1.textContent = MatchList[Current_Index].b1
+        B2.textContent = MatchList[Current_Index].b2
+        B3.textContent = MatchList[Current_Index].b3
+        R1.textContent = MatchList[Current_Index].r1
+        R2.textContent = MatchList[Current_Index].r2
+        R3.textContent = MatchList[Current_Index].r3
+    }
+    ba_L1.checked = ba_L2.checked = ba_L3.checked = false
+    ba_LH.value = ba_HH.value = bt_LH.value = bt_HH.value = "0"
+    bt_nh1.checked = bt_nh2.checked = bt_nh3.checked = true
+    bt_lh1.checked = bt_lh2.checked = bt_lh3.checked = false
+    bt_mh1.checked = bt_mh2.checked = bt_mh3.checked = false
+    bt_hh1.checked = bt_hh2.checked = bt_hh3.checked = false
+    bt_th1.checked = bt_th2.checked = bt_th3.checked = false
+    Modified_Blue()
+}
+
+let Summit_btn = document.getElementById("summit")
+
+Summit_btn.addEventListener("click", function () {
+    if (Current_Index == -1) {
+        alert("Select a match first")
+        return
+    }
+    if (confirm("Summit Match # " + MatchList[Current_Index].matchnum + " ?")) {
+        /* Add result*/
+        /* Save to LocalStorage */
+        Current_Index = -1
+        set_Default()
+    }
+})
+
+let Delete_btn = document.getElementById("delete")
+
+Delete_btn.addEventListener("click", function () {
+    if (Current_Index == -1) {
+        set_Default()
+        return
+    }
+    if (confirm("Delete Match # " + MatchList[Current_Index].matchnum + " ?\nThis match status will set to \"Unmatch\" no matter it have summitted or not before")) {
+        MatchList[Current_Index].result = null
+        /* Save to LocalStorage */
+        location.href = "./Control.html";
+    }
+})

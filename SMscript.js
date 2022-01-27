@@ -5,8 +5,10 @@ let add_confirm = document.getElementById("add_confirm")
 let iMatchnum = document.getElementById("Matchnum")
 let iB1 = document.getElementById("B1")
 let iB2 = document.getElementById("B2")
+let iB3 = document.getElementById("B3")
 let iR1 = document.getElementById("R1")
 let iR2 = document.getElementById("R2")
+let iR3 = document.getElementById("R3")
 let d_none = true
 let newMatch_mode = true
 let TeamList = []
@@ -61,9 +63,10 @@ add_confirm.onclick = function Edit() {
     let mnum = iMatchnum.value;
     let b1 = iB1.value;
     let b2 = iB2.value;
+    let b3 = iB3.value;
     let r1 = iR1.value;
     let r2 = iR2.value;
-
+    let r3 = iR3.value;
     if (mnum == "") {
         alert("Match Number is Empty.")
         return
@@ -88,6 +91,14 @@ add_confirm.onclick = function Edit() {
         alert("\"Blue 2\" is not in Team List.")
         return
     }
+    if (b3 == "") {
+        alert("\"Blue 3\" is Empty.")
+        return
+    }
+    if (!inTeamList(b3)) {
+        alert("\"Blue 3\" is not in Team List.")
+        return
+    }
     if (r1 == "") {
         alert("\"Red 1\" is Empty.")
         return
@@ -104,12 +115,26 @@ add_confirm.onclick = function Edit() {
         alert("\"Red 2\" is not in Team List.")
         return
     }
+    if (r3 == "") {
+        alert("\"Red 3\" is Empty.")
+        return
+    }
+    if (!inTeamList(r3)) {
+        alert("\"Red 3\" is not in Team List.")
+        return
+    }
 
     if (newMatch_mode) {
-        MatchList.push(newMatch(mnum, b1, b2, r1, r2))
+        MatchList.push(newMatch(mnum, b1, b2, b3, r1, r2, r3))
     }
     else {
-        MatchList[curIdx] = newMatch(mnum, b1, b2, r1, r2)
+        MatchList[curIdx].matchnum = mnum
+        MatchList[curIdx].b1 = b1
+        MatchList[curIdx].b2 = b2
+        MatchList[curIdx].b3 = b3
+        MatchList[curIdx].r1 = r1
+        MatchList[curIdx].r2 = r2
+        MatchList[curIdx].r3 = r3
         newMatch_mode = true;
     }
     sort_MatchList()
@@ -142,8 +167,8 @@ function inTeamList(teamnum) {
     return false;
 }
 
-function newMatch(matchnum, b1, b2, r1, r2) {
-    let new_one = { "matchnum": matchnum, "b1": b1, "b2": b2, "r1": r1, "r2": r2, "result": null }
+function newMatch(matchnum, b1, b2, b3, r1, r2, r3) {
+    let new_one = { "matchnum": matchnum, "b1": b1, "b2": b2, "b3": b3, "r1": r1, "r2": r2, "r3": r3, "result": null }
     return new_one
 }
 
@@ -168,8 +193,10 @@ function Edit_Button(event) {
     iMatchnum.value = MatchList[event.currentTarget.num].matchnum
     iB1.value = MatchList[event.currentTarget.num].b1
     iB2.value = MatchList[event.currentTarget.num].b2
+    iB3.value = MatchList[event.currentTarget.num].b3
     iR1.value = MatchList[event.currentTarget.num].r1
     iR2.value = MatchList[event.currentTarget.num].r2
+    iR3.value = MatchList[event.currentTarget.num].r3
     newMatch_mode = false
 }
 
@@ -188,47 +215,56 @@ function UpdateMatches() {
 
         // Set Match Number
         let td = document.createElement("td");
-        td.classList.add("w10")
+        td.classList.add("tb")
         td.classList.add("border1")
         let tag = document.createTextNode(match.matchnum);
         td.appendChild(tag);
         row.appendChild(td);
 
         // Set Blue1
-        td = document.createElement("td");
-        td.classList.add("w20")
+        td = document.createElement("td")
         td.classList.add("border1")
         tag = document.createTextNode(match.b1);
         td.appendChild(tag);
         row.appendChild(td);
 
         // Set Blue2
-        td = document.createElement("td");
-        td.classList.add("w20")
+        td = document.createElement("td")
         td.classList.add("border1")
         tag = document.createTextNode(match.b2);
         td.appendChild(tag);
         row.appendChild(td);
 
+        // Set Blue3
+        td = document.createElement("td")
+        td.classList.add("border1")
+        tag = document.createTextNode(match.b3);
+        td.appendChild(tag);
+        row.appendChild(td);
+
         // Set Red1
         td = document.createElement("td");
-        td.classList.add("w20")
         td.classList.add("border1")
         tag = document.createTextNode(match.r1);
         td.appendChild(tag);
         row.appendChild(td);
 
         // Set Red2
-        td = document.createElement("td");
-        td.classList.add("w20")
+        td = document.createElement("td")
         td.classList.add("border1")
         tag = document.createTextNode(match.r2);
         td.appendChild(tag);
         row.appendChild(td);
 
+        // Set Red3
+        td = document.createElement("td")
+        td.classList.add("border1")
+        tag = document.createTextNode(match.r3);
+        td.appendChild(tag);
+        row.appendChild(td);
+
         // Add Edit btn
-        td = document.createElement("td");
-        td.classList.add("w5")
+        td = document.createElement("td")
         td.classList.add("border1")
         tag = document.createElement("button");
         tag.style.cssText = 'width: 15px; height: 15px; background-color: yellow;'
@@ -238,8 +274,7 @@ function UpdateMatches() {
         row.appendChild(td);
 
         // Add Delete btn
-        td = document.createElement("td");
-        td.classList.add("w5")
+        td = document.createElement("td")
         td.classList.add("border1")
         tag = document.createElement("button");
         tag.style.cssText = 'width: 15px; height: 15px; background-color: red;'
