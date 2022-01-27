@@ -5,13 +5,26 @@ FRC 2022 ScoreKeeper
 
 ### Teams
 - Add New Team
-    Show text typing region and button "Add Team" which should be clicked after filling blank.
+    - Add Team / Modified Change
+
 - Edit
-    Confirm to show edit and delete button.
-- Return
-    Return MainBoard
+    - Add Team / Modified Change
+
+- Detele
+    
+- Save & Return
+
     
 ### Matches
+- Add New Match
+    - Add Match / Modified Change
+    
+- Edit
+    - Add Match / Modified Change
+
+- Detele
+    
+- Save & Return
 
 
 ## Control

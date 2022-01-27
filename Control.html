@@ -10,7 +10,160 @@
 </head>
 
 <body>
-
+    <div class="box mtext">
+        <div class="d_inline w7" id="match_select">
+            <h3 class="mtext"># Match</h3>
+        </div>
+        <div class="d_inline w90 mtext border3">
+            <h2 class="m_10">Match Result</h2>
+            <div class="d_inline w_half">
+                <p>
+                <h4 class="bg_b d_inline w3p m_10h">-</h4>
+                <h4 class="bg_b d_inline w3p m_10h">-</h4>
+                <h4 class="bg_b d_inline w3p m_10h">-</h4>
+                </p>
+                <h4 class="bg_b m_10h">BLUE ALLIANCE</h4>
+                <div>
+                    <h4 class="m_20">Autonomous</h4>
+                    <p>Leave Tarmac :
+                        <input type="checkbox" id="ba_L1">Robot 1
+                        <input type="checkbox" id="ba_L2">Robot 2
+                        <input type="checkbox" id="ba_L3">Robot 3
+                    </p>
+                    <p>Scored Cargo :
+                        <input type="number" min="0" value="0" class="w5" id="ba_LH"> in Low Hub
+                        <input type="number" min="0" value="0" class="w5" id="ba_HH"> in High Hub
+                    </p>
+                </div>
+                <div>
+                    <h4 class="m_20">Teleoperated</h4>
+                    <p>Scored Cargo :
+                        <input type="number" min="0" value="0" class="w5" id="bt_LH"> in Low Hub
+                        <input type="number" min="0" value="0" class="w5" id="bt_HH"> in High Hub
+                    </p>
+                    <p>Hung of Robot 1 :
+                        <input type="radio" id="bt_nh1" name="bhr1" checked="checked">
+                        <label for="bt_nh1">None </label>
+                        <input type="radio" id="bt_lh1" name="bhr1">
+                        <label for="bt_lh1">Low </label>
+                        <input type="radio" id="bt_mh1" name="bhr1">
+                        <label for="bt_mh1">Mid </label>
+                        <input type="radio" id="bt_hh1" name="bhr1">
+                        <label for="bt_hh1">High </label>
+                        <input type="radio" id="bt_th1" name="bhr1">
+                        <label for="bt_th1">Traversal </label>
+                    </p>
+                    <p>Hung of Robot 2 :
+                        <input type="radio" id="bt_nh2" name="bhr2" checked="checked">
+                        <label for="bt_nh2">None </label>
+                        <input type="radio" id="bt_lh2" name="bhr2">
+                        <label for="bt_lh2">Low </label>
+                        <input type="radio" id="bt_mh2" name="bhr2">
+                        <label for="bt_mh2">Mid </label>
+                        <input type="radio" id="bt_hh2" name="bhr2">
+                        <label for="bt_hh2">High </label>
+                        <input type="radio" id="bt_th2" name="bhr2">
+                        <label for="bt_th2">Traversal </label>
+                    </p>
+                    <p>Hung of Robot 3 :
+                        <input type="radio" id="bt_nh3" name="bhr3" checked="checked">
+                        <label for="bt_nh3">None </label>
+                        <input type="radio" id="bt_lh3" name="bhr3">
+                        <label for="bt_lh3">Low </label>
+                        <input type="radio" id="bt_mh3" name="bhr3">
+                        <label for="bt_mh3">Mid </label>
+                        <input type="radio" id="bt_hh3" name="bhr3">
+                        <label for="bt_hh3">High </label>
+                        <input type="radio" id="bt_th3" name="bhr3">
+                        <label for="bt_th3">Traversal </label>
+                    </p>
+                </div>
+                <div>
+                    <h4 class="m_20">Penalty</h4>
+                    <p>Foul : <input type="number" min="0" value="0" class="w5"> Tech Foul : <input type="number"
+                            min="0" value="0" class="w5"></p>
+                </div>
+                <p>
+                <h4 class="bg_b d_inline w75 m_10h">Total Score : </h4>
+                <h4 class="bg_b d_inline w20 m_10h" id="blue_score">0</h4>
+                </p>
+            </div>
+            <div class="d_inline w_half">
+                <p>
+                <h4 class="bg_r d_inline w3p m_10h">-</h4>
+                <h4 class="bg_r d_inline w3p m_10h">-</h4>
+                <h4 class="bg_r d_inline w3p m_10h">-</h4>
+                </p>
+                <h4 class="bg_r m_10h">RED ALLIANCE</h4>
+                <div>
+                    <h4 class="m_20">Autonomous</h4>
+                    <p>Leave Tarmac :
+                        <input type="checkbox" id="ra_L1">Robot 1
+                        <input type="checkbox" id="ra_L2">Robot 2
+                        <input type="checkbox" id="ra_L3">Robot 3
+                    </p>
+                    <p>Scored Cargo :
+                        <input type="number" min="0" value="0" class="w5" id="ra_LH"> in Low Hub
+                        <input type="number" min="0" value="0" class="w5" id="ra_HH"> in High Hub
+                    </p>
+                </div>
+                <div>
+                    <h4 class="m_20">Teleoperated</h4>
+                    <p>Scored Cargo :
+                        <input type="number" min="0" value="0" class="w5" id="rt_LH"> in Low Hub
+                        <input type="number" min="0" value="0" class="w5" id="rt_HH"> in High Hub
+                    </p>
+                    <p>Hung of Robot 1 :
+                        <input type="radio" id="rt_nh1" name="rhr1" checked="checked">
+                        <label for="rt_nh1">None </label>
+                        <input type="radio" id="rt_lh1" name="rhr1">
+                        <label for="rt_lh1">Low </label>
+                        <input type="radio" id="rt_mh1" name="rhr1">
+                        <label for="rt_mh1">Mid </label>
+                        <input type="radio" id="rt_hh1" name="rhr1">
+                        <label for="rt_hh1">High </label>
+                        <input type="radio" id="rt_th1" name="rhr1">
+                        <label for="rt_th1">Traversal </label>
+                    </p>
+                    <p>Hung of Robot 2 :
+                        <input type="radio" id="rt_nh2" name="rhr2" checked="checked">
+                        <label for="rt_nh2">None </label>
+                        <input type="radio" id="rt_lh2" name="rhr2">
+                        <label for="rt_lh2">Low </label>
+                        <input type="radio" id="rt_mh2" name="rhr2">
+                        <label for="rt_mh2">Mid </label>
+                        <input type="radio" id="rt_hh2" name="rhr2">
+                        <label for="rt_hh2">High </label>
+                        <input type="radio" id="rt_th2" name="rhr2">
+                        <label for="rt_th2">Traversal </label>
+                    </p>
+                    <p>Hung of Robot 3 :
+                        <input type="radio" id="rt_nh3" name="rhr3" checked="checked">
+                        <label for="rt_nh3">None </label>
+                        <input type="radio" id="rt_lh3" name="rhr3">
+                        <label for="rt_lh3">Low </label>
+                        <input type="radio" id="rt_mh3" name="rhr3">
+                        <label for="rt_mh3">Mid </label>
+                        <input type="radio" id="rt_hh3" name="rhr3">
+                        <label for="rt_hh3">High </label>
+                        <input type="radio" id="rt_th3" name="rhr3">
+                        <label for="rt_th3">Traversal </label>
+                    </p>
+                </div>
+                <div>
+                    <h4 class="m_20">Penalty</h4>
+                    <p>Foul : <input type="number" min="0" value="0" class="w5"> Tech Foul : <input type="number"
+                            min="0" value="0" class="w5"></p>
+                </div>
+                <p>
+                <h4 class="bg_r d_inline w75 m_10h">Total Score : </h4>
+                <h4 class="bg_r d_inline w20 m_10h" id="red_score">0</h4>
+                </p>
+            </div>
+            <button class="bg_g m_10">Summit</button>
+        </div>
+        <button class="m_10" id="rr">Return</button>
+    </div>
 </body>
 
 <script src="Controlscript.js"></script>
