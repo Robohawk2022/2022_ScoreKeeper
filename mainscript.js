@@ -17,3 +17,7 @@ sm.onclick = function link_to() {
 cm.onclick = function link_to() {
     location.href = "./Control.html";
 }
+
+dr.onclick = function link_to() {
+    location.href = "./Ranking.html";
+}

@@ -1,6 +1,11 @@
+const L = 0, H = 1
+const None = 0, Low = 1, Mid = 2, High = 3, Traversal = 4
+
 let ms = document.getElementById("match_select")
+
 let Current_Index = -1
 let MatchList = []
+let BtnList = []
 try {
     MatchList = JSON.parse(localStorage.getItem("Matches_2022"));
     if (MatchList == null) MatchList = []
@@ -18,10 +23,13 @@ for (let i = 0; i < MatchList.length; ++i) {
     btn.num = i;
     btn.addEventListener("click", Set_Match, false);
     ms.appendChild(btn);
+    BtnList.push(btn)
 }
 
 let rr = document.getElementById("rr")
 rr.onclick = function link_to() {
+    if (Current_Index != -1)
+        if (!confirm("You are editting a match. Are you sure to return to dashboard?")) return
     location.href = "./MainDashBoard.html";
 }
 
@@ -55,12 +63,22 @@ let bt_th1 = document.getElementById("bt_th1") // 16
 let bt_th2 = document.getElementById("bt_th2") // 16
 let bt_th3 = document.getElementById("bt_th3") // 16
 
+let bpf = document.getElementById("bpf")
+let bptf = document.getElementById("bptf")
+let rpf = document.getElementById("rpf")
+let rptf = document.getElementById("rptf")
+
+bpf.addEventListener("change", function () { Modified_Red() })
+bptf.addEventListener("change", function () { Modified_Red() })
+rpf.addEventListener("change", function () { Modified_Blue() })
+rptf.addEventListener("change", function () { Modified_Blue() })
+
 let blue_score = document.getElementById("blue_score")
 
 
 ba_L1.addEventListener("click", function () { Modified_Blue() })
 ba_L2.addEventListener("click", function () { Modified_Blue() })
-ba_L2.addEventListener("click", function () { Modified_Blue() })
+ba_L3.addEventListener("click", function () { Modified_Blue() })
 ba_LH.addEventListener("change", function () { Modified_Blue() })
 ba_HH.addEventListener("change", function () { Modified_Blue() })
 bt_LH.addEventListener("change", function () { Modified_Blue() })
@@ -102,6 +120,8 @@ function Modified_Blue() {
     if (bt_th1.checked) total += 16
     if (bt_th2.checked) total += 16
     if (bt_th3.checked) total += 16
+    total += (Number(rpf.value) * 4)
+    total += (Number(rptf.value) * 8)
     blue_score.textContent = String(total)
 }
 
@@ -135,6 +155,57 @@ let rt_th1 = document.getElementById("rt_th1") // 16
 let rt_th2 = document.getElementById("rt_th2") // 16
 let rt_th3 = document.getElementById("rt_th3") // 16
 
+let red_score = document.getElementById("red_score")
+
+ra_L1.addEventListener("click", function () { Modified_Red() })
+ra_L2.addEventListener("click", function () { Modified_Red() })
+ra_L3.addEventListener("click", function () { Modified_Red() })
+ra_LH.addEventListener("change", function () { Modified_Red() })
+ra_HH.addEventListener("change", function () { Modified_Red() })
+rt_LH.addEventListener("change", function () { Modified_Red() })
+rt_HH.addEventListener("change", function () { Modified_Red() })
+rt_nh1.addEventListener("change", function () { Modified_Red() })
+rt_nh2.addEventListener("change", function () { Modified_Red() })
+rt_nh3.addEventListener("change", function () { Modified_Red() })
+rt_lh1.addEventListener("change", function () { Modified_Red() })
+rt_lh2.addEventListener("change", function () { Modified_Red() })
+rt_lh3.addEventListener("change", function () { Modified_Red() })
+rt_mh1.addEventListener("change", function () { Modified_Red() })
+rt_mh2.addEventListener("change", function () { Modified_Red() })
+rt_mh3.addEventListener("change", function () { Modified_Red() })
+rt_hh1.addEventListener("change", function () { Modified_Red() })
+rt_hh2.addEventListener("change", function () { Modified_Red() })
+rt_hh3.addEventListener("change", function () { Modified_Red() })
+rt_th1.addEventListener("change", function () { Modified_Red() })
+rt_th2.addEventListener("change", function () { Modified_Red() })
+rt_th3.addEventListener("change", function () { Modified_Red() })
+
+function Modified_Red() {
+    let total = 0
+    if (ra_L1.checked) total += 2
+    if (ra_L2.checked) total += 2
+    if (ra_L3.checked) total += 2
+    total += (Number(ra_LH.value) * 2)
+    total += (Number(ra_HH.value) * 4)
+    total += (Number(rt_LH.value) * 1)
+    total += (Number(rt_HH.value) * 2)
+    if (rt_lh1.checked) total += 4
+    if (rt_lh2.checked) total += 4
+    if (rt_lh3.checked) total += 4
+    if (rt_mh1.checked) total += 6
+    if (rt_mh2.checked) total += 6
+    if (rt_mh3.checked) total += 6
+    if (rt_hh1.checked) total += 10
+    if (rt_hh2.checked) total += 10
+    if (rt_hh3.checked) total += 10
+    if (rt_th1.checked) total += 16
+    if (rt_th2.checked) total += 16
+    if (rt_th3.checked) total += 16
+    total += (Number(bpf.value) * 4)
+    total += (Number(bptf.value) * 8)
+    red_score.textContent = String(total)
+}
+
 let B1 = document.getElementById("B1")
 let B2 = document.getElementById("B2")
 let B3 = document.getElementById("B3")
@@ -144,27 +215,81 @@ let R3 = document.getElementById("R3")
 
 function Set_Match(event) {
     let idx = event.currentTarget.num;
+    if (Current_Index == idx) {
+        alert("Already select this match!")
+        return
+    }
     if (MatchList[idx].result != null) {
         if (!confirm("Match #" + String(MatchList[idx].matchnum) + " have summitted.\nAre you sure to edit again?"))
-            return;
+            return
     }
     if (Current_Index != -1) {
         if (!confirm("Match #" + String(MatchList[Current_Index].matchnum) + " is not summitted yet.\nAre you sure to exit now?"))
-            return;
+            return
     }
     Current_Index = idx
-    if (MatchList[idx].result == null) {
-        set_Default()
-    }
-    else {
-        /* Set all element */
+    set_Default()
+    if (MatchList[idx].result != null) {
+        let result = MatchList[idx].result
+
+        ba_L1.checked = result.blue.auto.leave_tarmac[0]
+        ba_L2.checked = result.blue.auto.leave_tarmac[1]
+        ba_L3.checked = result.blue.auto.leave_tarmac[2]
+        ba_LH.value = result.blue.auto.score_cargo[L]
+        ba_HH.value = result.blue.auto.score_cargo[H]
+        bt_LH.value = result.blue.tele.score_cargo[L]
+        bt_HH.value = result.blue.tele.score_cargo[H]
+        bt_nh1.checked = result.blue.tele.hung_r1[None]
+        bt_nh2.checked = result.blue.tele.hung_r2[None]
+        bt_nh3.checked = result.blue.tele.hung_r3[None]
+        bt_lh1.checked = result.blue.tele.hung_r1[Low]
+        bt_lh2.checked = result.blue.tele.hung_r2[Low]
+        bt_lh3.checked = result.blue.tele.hung_r3[Low]
+        bt_mh1.checked = result.blue.tele.hung_r1[Mid]
+        bt_mh2.checked = result.blue.tele.hung_r2[Mid]
+        bt_mh3.checked = result.blue.tele.hung_r3[Mid]
+        bt_hh1.checked = result.blue.tele.hung_r1[High]
+        bt_hh2.checked = result.blue.tele.hung_r2[High]
+        bt_hh3.checked = result.blue.tele.hung_r3[High]
+        bt_th1.checked = result.blue.tele.hung_r1[Traversal]
+        bt_th2.checked = result.blue.tele.hung_r2[Traversal]
+        bt_th3.checked = result.blue.tele.hung_r3[Traversal]
+        bpf.value = result.blue.penalty.fuol
+        bptf.value = result.blue.penalty.tech_fuol
+
+        ra_L1.checked = result.red.auto.leave_tarmac[0]
+        ra_L2.checked = result.red.auto.leave_tarmac[1]
+        ra_L3.checked = result.red.auto.leave_tarmac[2]
+        ra_LH.value = result.red.auto.score_cargo[L]
+        ra_HH.value = result.red.auto.score_cargo[H]
+        rt_LH.value = result.red.tele.score_cargo[L]
+        rt_HH.value = result.red.tele.score_cargo[H]
+        rt_nh1.checked = result.red.tele.hung_r1[None]
+        rt_nh2.checked = result.red.tele.hung_r2[None]
+        rt_nh3.checked = result.red.tele.hung_r3[None]
+        rt_lh1.checked = result.red.tele.hung_r1[Low]
+        rt_lh2.checked = result.red.tele.hung_r2[Low]
+        rt_lh3.checked = result.red.tele.hung_r3[Low]
+        rt_mh1.checked = result.red.tele.hung_r1[Mid]
+        rt_mh2.checked = result.red.tele.hung_r2[Mid]
+        rt_mh3.checked = result.red.tele.hung_r3[Mid]
+        rt_hh1.checked = result.red.tele.hung_r1[High]
+        rt_hh2.checked = result.red.tele.hung_r2[High]
+        rt_hh3.checked = result.red.tele.hung_r3[High]
+        rt_th1.checked = result.red.tele.hung_r1[Traversal]
+        rt_th2.checked = result.red.tele.hung_r2[Traversal]
+        rt_th3.checked = result.red.tele.hung_r3[Traversal]
+        rpf.value = result.red.penalty.fuol
+        rptf.value = result.red.penalty.tech_fuol
+        Modified_Blue()
+        Modified_Red()
     }
 }
 
 function set_Default() {
     if (Current_Index == -1) {
-        B1.textContent = B2.textContent = B3.textContent = "-"
-        R1.textContent = R2.textContent = R3.textContent = "-"
+        B1.textContent = B2.textContent = B3.textContent = "XXXXX"
+        R1.textContent = R2.textContent = R3.textContent = "XXXXX"
     }
     else {
         B1.textContent = MatchList[Current_Index].b1
@@ -181,7 +306,18 @@ function set_Default() {
     bt_mh1.checked = bt_mh2.checked = bt_mh3.checked = false
     bt_hh1.checked = bt_hh2.checked = bt_hh3.checked = false
     bt_th1.checked = bt_th2.checked = bt_th3.checked = false
+    bpf.value = bptf.value = "0"
+
+    ra_L1.checked = ra_L2.checked = ra_L3.checked = false
+    ra_LH.value = ra_HH.value = rt_LH.value = rt_HH.value = "0"
+    rt_nh1.checked = rt_nh2.checked = rt_nh3.checked = true
+    rt_lh1.checked = rt_lh2.checked = rt_lh3.checked = false
+    rt_mh1.checked = rt_mh2.checked = rt_mh3.checked = false
+    rt_hh1.checked = rt_hh2.checked = rt_hh3.checked = false
+    rt_th1.checked = rt_th2.checked = rt_th3.checked = false
+    rpf.value = rptf.value = "0"
     Modified_Blue()
+    Modified_Red()
 }
 
 let Summit_btn = document.getElementById("summit")
@@ -192,8 +328,9 @@ Summit_btn.addEventListener("click", function () {
         return
     }
     if (confirm("Summit Match # " + MatchList[Current_Index].matchnum + " ?")) {
-        /* Add result*/
-        /* Save to LocalStorage */
+        MatchList[Current_Index].result = getScoreResult();
+        BtnList[Current_Index].classList.add("bg_g")
+        localStorage.setItem("Matches_2022", JSON.stringify(MatchList));
         Current_Index = -1
         set_Default()
     }
@@ -208,7 +345,47 @@ Delete_btn.addEventListener("click", function () {
     }
     if (confirm("Delete Match # " + MatchList[Current_Index].matchnum + " ?\nThis match status will set to \"Unmatch\" no matter it have summitted or not before")) {
         MatchList[Current_Index].result = null
-        /* Save to LocalStorage */
-        location.href = "./Control.html";
+        localStorage.setItem("Matches_2022", JSON.stringify(MatchList));
+        BtnList[Current_Index].classList.remove("bg_g")
+        Current_Index = -1
+        set_Default()
+
     }
 })
+
+function getScoreResult() {
+    return {
+        "blue": {
+            "auto": {
+                "leave_tarmac": [ba_L1.checked, ba_L2.checked, ba_L3.checked],
+                "score_cargo": [ba_LH.value, ba_HH.value]
+            },
+            "tele": {
+                "score_cargo": [bt_LH.value, bt_HH.value],
+                "hung_r1": [bt_nh1.checked, bt_lh1.checked, bt_mh1.checked, bt_hh1.checked, bt_th1.checked],
+                "hung_r2": [bt_nh2.checked, bt_lh2.checked, bt_mh2.checked, bt_hh2.checked, bt_th2.checked],
+                "hung_r3": [bt_nh3.checked, bt_lh3.checked, bt_mh3.checked, bt_hh3.checked, bt_th3.checked],
+            },
+            "penalty": {
+                "fuol": bpf.value,
+                "tech_fuol": bptf.value,
+            }
+        },
+        "red": {
+            "auto": {
+                "leave_tarmac": [ra_L1.checked, ra_L2.checked, ra_L3.checked],
+                "score_cargo": [ra_LH.value, ra_HH.value]
+            },
+            "tele": {
+                "score_cargo": [rt_LH.value, rt_HH.value],
+                "hung_r1": [rt_nh1.checked, rt_lh1.checked, rt_mh1.checked, rt_hh1.checked, rt_th1.checked],
+                "hung_r2": [rt_nh2.checked, rt_lh2.checked, rt_mh2.checked, rt_hh2.checked, rt_th2.checked],
+                "hung_r3": [rt_nh3.checked, rt_lh3.checked, rt_mh3.checked, rt_hh3.checked, rt_th3.checked],
+            },
+            "penalty": {
+                "fuol": rpf.value,
+                "tech_fuol": rptf.value,
+            }
+        }
+    }
+}
