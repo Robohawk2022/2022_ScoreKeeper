@@ -13,7 +13,6 @@ FRC 2022 ScoreKeeper
 - Detele
     
 - Save & Return
-
     
 ### Matches
 - Add New Match
@@ -26,10 +25,17 @@ FRC 2022 ScoreKeeper
     
 - Save & Return
 
-
 ## Control
 
 ### Match Result
+
+- Select Match
+    
+- Edit Result
+
+- Summit
+
+- Detele
 
 ## Display
 
@@ -37,4 +43,3 @@ FRC 2022 ScoreKeeper
 
 ### Match Result
 
-### Timer

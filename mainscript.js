@@ -21,3 +21,6 @@ cm.onclick = function link_to() {
 dr.onclick = function link_to() {
     location.href = "./Ranking.html";
 }
+dm.onclick = function link_to() {
+    location.href = "./MatchResult.html";
+}

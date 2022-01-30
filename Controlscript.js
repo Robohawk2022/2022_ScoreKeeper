@@ -117,9 +117,9 @@ function Modified_Blue() {
     if (bt_hh1.checked) total += 10
     if (bt_hh2.checked) total += 10
     if (bt_hh3.checked) total += 10
-    if (bt_th1.checked) total += 16
-    if (bt_th2.checked) total += 16
-    if (bt_th3.checked) total += 16
+    if (bt_th1.checked) total += 15
+    if (bt_th2.checked) total += 15
+    if (bt_th3.checked) total += 15
     total += (Number(rpf.value) * 4)
     total += (Number(rptf.value) * 8)
     blue_score.textContent = String(total)
@@ -198,9 +198,9 @@ function Modified_Red() {
     if (rt_hh1.checked) total += 10
     if (rt_hh2.checked) total += 10
     if (rt_hh3.checked) total += 10
-    if (rt_th1.checked) total += 16
-    if (rt_th2.checked) total += 16
-    if (rt_th3.checked) total += 16
+    if (rt_th1.checked) total += 15
+    if (rt_th2.checked) total += 15
+    if (rt_th3.checked) total += 15
     total += (Number(bpf.value) * 4)
     total += (Number(bptf.value) * 8)
     red_score.textContent = String(total)
