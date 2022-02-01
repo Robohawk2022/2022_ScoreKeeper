@@ -329,6 +329,8 @@ Summit_btn.addEventListener("click", function () {
     }
     if (confirm("Summit Match # " + MatchList[Current_Index].matchnum + " ?")) {
         MatchList[Current_Index].result = getScoreResult();
+        MatchList[Current_Index].result.red.data = Caculate_Result(MatchList[Current_Index].result.red)
+        MatchList[Current_Index].result.blue.data = Caculate_Result(MatchList[Current_Index].result.blue)
         BtnList[Current_Index].classList.add("bg_g")
         localStorage.setItem("Matches_2022", JSON.stringify(MatchList));
         Current_Index = -1
@@ -369,7 +371,8 @@ function getScoreResult() {
             "penalty": {
                 "fuol": bpf.value,
                 "tech_fuol": bptf.value,
-            }
+            },
+            "data": null
         },
         "red": {
             "auto": {
@@ -385,7 +388,45 @@ function getScoreResult() {
             "penalty": {
                 "fuol": rpf.value,
                 "tech_fuol": rptf.value,
-            }
-        }
+            },
+            "data": null
+        },
     }
+}
+
+function Caculate_Result(result) {
+    let data = { add_RP: 0, MP: 0, HP: 0, Auto: 0, Penalty: 0 }
+    if (result.auto.leave_tarmac[0]) data.Auto += 2
+    if (result.auto.leave_tarmac[1]) data.Auto += 2
+    if (result.auto.leave_tarmac[2]) data.Auto += 2
+    data.Auto += (Number(result.auto.score_cargo[L]) * 2)
+    data.Auto += (Number(result.auto.score_cargo[H]) * 4)
+    data.MP += data.Auto
+    data.MP += (Number(result.tele.score_cargo[L]) * 1)
+    data.MP += (Number(result.tele.score_cargo[H]) * 2)
+    if (result.tele.hung_r1[Low]) data.HP += 4
+    if (result.tele.hung_r2[Low]) data.HP += 4
+    if (result.tele.hung_r3[Low]) data.HP += 4
+    if (result.tele.hung_r1[Mid]) data.HP += 6
+    if (result.tele.hung_r2[Mid]) data.HP += 6
+    if (result.tele.hung_r3[Mid]) data.HP += 6
+    if (result.tele.hung_r1[High]) data.HP += 10
+    if (result.tele.hung_r2[High]) data.HP += 10
+    if (result.tele.hung_r3[High]) data.HP += 10
+    if (result.tele.hung_r1[Traversal]) data.HP += 15
+    if (result.tele.hung_r2[Traversal]) data.HP += 15
+    if (result.tele.hung_r3[Traversal]) data.HP += 15
+    data.MP += data.HP
+    if (data.HP >= 16) data.add_RP += 1
+    if (Number(result.auto.score_cargo[L]) + Number(result.auto.score_cargo[H]) >= 5) {
+        if (Number(result.tele.score_cargo[L]) + Number(result.tele.score_cargo[H]) >= 18)
+            data.add_RP += 1
+    }
+    else {
+        if (Number(result.tele.score_cargo[L]) + Number(result.tele.score_cargo[H]) >= 20)
+            data.add_RP += 1
+    }
+    data.Penalty += (Number(result.penalty.fuol) * 4)
+    data.Penalty += (Number(result.penalty.tech_fuol)) * 8
+    return data
 }

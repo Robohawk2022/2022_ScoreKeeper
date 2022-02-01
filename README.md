@@ -1,9 +1,26 @@
 # 2022_ScoreKeeper
 FRC 2022 ScoreKeeper
 
-## Setup
+## 使用說明
+### 步驟
 
-### Teams
+### Setup Teams
+
+### Setup Matches
+
+### Control Match Result
+
+### Display
+
+#### Match Result
+#### Ranking
+
+## 功能表
+以下部分是我工作進度，與使用上無關，不用看
+
+### Setup
+
+#### Teams
 - Add New Team
     - Add Team / Modified Change
 
@@ -14,7 +31,7 @@ FRC 2022 ScoreKeeper
     
 - Save & Return
     
-### Matches
+#### Matches
 - Add New Match
     - Add Match / Modified Change
     
@@ -25,9 +42,9 @@ FRC 2022 ScoreKeeper
     
 - Save & Return
 
-## Control
+### Control
 
-### Match Result
+#### Match Result
 
 - Select Match
     
@@ -37,9 +54,9 @@ FRC 2022 ScoreKeeper
 
 - Detele
 
-## Display
+### Display
 
-### Ranking
+#### Ranking
 
-### Match Result
+#### Match Result
 

@@ -12,6 +12,7 @@ catch {
     MatchList = [];
 }
 
+
 let ResultTable = document.getElementById("ResultTable");
 row_len = ResultTable.rows.length;
 // Fill Table
@@ -75,12 +76,8 @@ for (let match of MatchList) {
     td.classList.add("border1")
     let text = "- : -"
     if (match.result != null) {
-        let red_score = Caculate_Score(match.result.red)
-        let blue_score = Caculate_Score(match.result.blue)
-        red_score += (Number(match.result.blue.penalty.fuol) * 4)
-        red_score += (Number(match.result.blue.penalty.tech_fuol) * 8)
-        blue_score += (Number(match.result.red.penalty.fuol) * 4)
-        blue_score += (Number(match.result.red.penalty.tech_fuol) * 8)
+        let blue_score = match.result.blue.data.MP + match.result.red.data.Penalty
+        let red_score = match.result.red.data.MP + match.result.blue.data.Penalty
         text = String(blue_score) + " : " + String(red_score)
         if (red_score > blue_score) td.classList.add("bg_r")
         else if (red_score < blue_score) td.classList.add("bg_b")
@@ -91,28 +88,4 @@ for (let match of MatchList) {
     row.appendChild(td);
 
     count += 1;
-}
-
-function Caculate_Score(result) {
-    let total = 0
-    if (result.auto.leave_tarmac[0]) total += 2
-    if (result.auto.leave_tarmac[1]) total += 2
-    if (result.auto.leave_tarmac[2]) total += 2
-    total += (Number(result.auto.score_cargo[0]) * 2)
-    total += (Number(result.auto.score_cargo[1]) * 4)
-    total += (Number(result.tele.score_cargo[0]) * 1)
-    total += (Number(result.tele.score_cargo[1]) * 2)
-    if (result.tele.hung_r1[1]) total += 4
-    if (result.tele.hung_r2[1]) total += 4
-    if (result.tele.hung_r3[1]) total += 4
-    if (result.tele.hung_r1[2]) total += 6
-    if (result.tele.hung_r2[2]) total += 6
-    if (result.tele.hung_r3[2]) total += 6
-    if (result.tele.hung_r1[3]) total += 10
-    if (result.tele.hung_r2[3]) total += 10
-    if (result.tele.hung_r3[3]) total += 10
-    if (result.tele.hung_r1[4]) total += 15
-    if (result.tele.hung_r2[4]) total += 15
-    if (result.tele.hung_r3[4]) total += 15
-    return total
 }
