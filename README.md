@@ -1,6 +1,6 @@
 # 2022_ScoreKeeper
-FRC 2022 ScoreKeeper 操作說明
-網路連結 : https://hackmd.io/@John40066/HJfsLyuCY
+- FRC 2022 ScoreKeeper 操作說明
+- 網路連結 : https://hackmd.io/@John40066/HJfsLyuCY
 
 ## 分數表
 ![](https://i.imgur.com/LSNcvj0.png)
