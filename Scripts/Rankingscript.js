@@ -25,6 +25,7 @@ let rank_list = []
 
 for (let team of TeamList) {
     let tnum = team.number
+    if (tnum[0] == "-") continue;
     let total_data = { num: tnum, RP: 0, MP: 0, HP: 0, Auto: 0, W: 0, L: 0, T: 0, match_num: 0 }
     for (let match of MatchList) {
         if (match.result == null) continue;
