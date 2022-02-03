@@ -21,19 +21,17 @@
 - 若按下紅色刪除扭並對彈出的視窗按下確定，即可刪除該隊伍
 - 按下編輯即可更改隊伍名稱(Name)及編號(Number)，按下 `Add Team / Modify Change` 儲存修改並顯示新的結果在下分
 - 按下 `Save & Return` 才會儲存並會到 Main DashBoard
-:::danger
-- 若直接返回上一頁，就不會儲存剛剛的任何動作!!!!
-:::
+
+- **若直接返回上一頁，就不會儲存剛剛的任何動作!!!!**
+
 #### :game_die: Setup Matches
 ![](https://i.imgur.com/PYgSFpV.png)
 - 操作方式跟新增隊伍一樣(會自動排序 #Match)
 
-:::danger
 - 有可能會有不計分的代打情況，目前解決方式是
 1. 新增隊伍且該編號小於等於 0 (例如 11047 有代打，就可以新增編號 -11047)
 2. 再新增比賽時，將該隊伍用小於等於 0 的編號輸入
 3. 計算 Ranking 時，並不會將編號小於等於 0 的顯示
-:::
 
 #### :memo: Control Match Result
 
